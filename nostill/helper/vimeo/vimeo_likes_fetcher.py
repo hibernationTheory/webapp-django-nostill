@@ -2,14 +2,14 @@ import sys
 import urllib2
 import BeautifulSoup as bs
 import html5lib
-import sqlite3
 import time
 import json
 import os
 
 def vimeoLikesFetcher(userName, pageLimit = None):
     """fetches the id numbers from the url's for likes by a given user name in vimeo, 
-    with the given page limit if there are any
+    with the given page limit if there are any. example usage from the terminal:
+    python vimeo_likes_fetcher.py <username> <page limit integer>
     """
 
     try:
@@ -17,14 +17,6 @@ def vimeoLikesFetcher(userName, pageLimit = None):
     except ValueError:
         print "the provided page limit value needs to be of type integer, problem with : %s" % pageLimit
         return
-
-    if pageLimit:
-        fileName = "likes_user-%s-limit-%s.txt" % (userName, pageLimit)
-    else:
-        fileName = "likes_user-%s.txt" % userName
-
-    filePath = os.path.dirname(__file__)
-    output_file_name = os.path.join(filePath, fileName)
 
     counter = 1
     path = "http://vimeo.com/%s/likes" %userName
@@ -70,7 +62,7 @@ def vimeoLikesOutputFile(data, userName, pageLimit = None):
         return
 
     if pageLimit:
-        fileName = "likes_user-%s-limit-%s.txt" % (userName, pageLimit)
+        fileName = "likes_user-%s_limit-%s.txt" % (userName, pageLimit)
     else:
         fileName = "likes_user-%s.txt" % userName
 
