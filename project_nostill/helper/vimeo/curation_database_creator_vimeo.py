@@ -8,19 +8,19 @@ import sys
 
 #TO DO: you can try to fetch tags from description file?
 
+VALUE_LIST = ["id", "upload_date", "stats_number_of_likes", "thumbnail_large", "thumbnail_medium", "title", "tags", "user_name", "description", "url"]
+EXTRA_VALUES = ["date_commit", "to_commit", "alt_url", "title_simple", "title_tr", "description_tr", "credits", "tags_tr", "video_category"]
+VALUE_DICT = {"id":("video_id", "integer"), "upload_date":("upload_date", "date"), "stats_number_of_likes":("noLikes", "integer"), 
+        "thumbnail_large":("thumbnail_large", "string"), "thumbnail_medium":("thumbnail_medium", "string"), "title":("title", "string"), "tags":("tags", "string"), 
+        "user_name":("user_name","string"), "description":("description", "string"), "url":("video_url", "real"),
+        "date_commit":("date_commit", "real"), "to_commit":("to_commit", "string"), "alt_url":("alt_url", "string"), "title_simple":("title_simple", "string"),
+        "title_tr":("title_tr", "string"), "description_tr":("description_tr", "string"), "credits":("credits", "string"), 
+        "tags_tr":("tags_tr", "string"), "video_category":("video_category", "string")
+        }
+
 class CreateCurationDatabase(object):
 
     def __init__(self, jsonFileName=None):
-        self.VALUE_LIST = ["id", "upload_date", "stats_number_of_likes", "thumbnail_large", "thumbnail_medium", "title", "tags", "user_name", "description", "url"]
-        self.EXTRA_VALUES = ["date_commit", "to_commit", "alt_url", "title_simple", "title_tr", "description_tr", "credits", "tags_tr", "video_category"]
-
-        self.VALUE_DICT = {"id":("video_id", "integer"), "upload_date":("upload_date", "date"), "stats_number_of_likes":("noLikes", "integer"), 
-                "thumbnail_large":("thumbnail_large", "string"), "thumbnail_medium":("thumbnail_medium", "string"), "title":("title", "string"), "tags":("tags", "string"), 
-                "user_name":("user_name","string"), "description":("description", "string"), "url":("video_url", "real"),
-                "date_commit":("date_commit", "real"), "to_commit":("to_commit", "string"), "alt_url":("alt_url", "string"), "title_simple":("title_simple", "string"),
-                "title_tr":("title_tr", "string"), "description_tr":("description_tr", "string"), "credits":("credits", "string"), 
-                "tags_tr":("tags_tr", "string"), "video_category":("video_category", "string")
-                }
 
         self.currentPath = os.path.dirname(__file__)
         if jsonFileName:
@@ -98,12 +98,12 @@ class CreateCurationDatabase(object):
         db = sqlite3.connect(databasePath)
         cursor = db.cursor()
 
-        all_values = self.VALUE_LIST[:]
-        for j in self.EXTRA_VALUES:
+        all_values = VALUE_LIST[:]
+        for j in EXTRA_VALUES:
             all_values.append(j)
 
         for i in all_values:
-            item = self.VALUE_DICT[i]
+            item = VALUE_DICT[i]
             if item[1] == "integer":
                 valueType = "INTEGER"
             if item[1] == "date":
@@ -138,7 +138,7 @@ class CreateCurationDatabase(object):
         dataEntryTuple = (currentId, )
         dataEntryList = []
 
-        for i in self.VALUE_LIST:
+        for i in VALUE_LIST:
             exists = data.get(i)
             if exists:
                value = (data[i],)
@@ -146,7 +146,7 @@ class CreateCurationDatabase(object):
                 value = ("NONE", )
             dataEntryTuple += value
 
-        for j in self.EXTRA_VALUES:
+        for j in EXTRA_VALUES:
             if j == "date_commit":
                 now = str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
                 value = (now,)
