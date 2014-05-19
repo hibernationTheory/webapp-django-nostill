@@ -8,8 +8,11 @@ import sys
 
 #TO DO: you can try to fetch tags from description file?
 
-VALUE_LIST = ["id", "upload_date", "stats_number_of_likes", "thumbnail_large", "thumbnail_medium", "title", "tags", "user_name", "description", "url"]
-EXTRA_VALUES = ["date_commit", "to_commit", "alt_url", "title_simple", "title_tr", "description_tr", "credits", "tags_tr", "video_category"]
+VALUES= ["id", "upload_date", "stats_number_of_likes", "thumbnail_large", "thumbnail_medium", "title", "tags", "user_name", "description", "url"]
+VALUES_EXTRA = ["date_commit", "to_commit", "alt_url", "title_simple", "title_tr", "description_tr", "credits", "tags_tr", "video_category"]
+
+ALL_VALUES = VALUES + VALUES_EXTRA
+
 VALUE_DICT = {"id":("video_id", "integer"), "upload_date":("upload_date", "date"), "stats_number_of_likes":("noLikes", "integer"), 
         "thumbnail_large":("thumbnail_large", "string"), "thumbnail_medium":("thumbnail_medium", "string"), "title":("title", "string"), "tags":("tags", "string"), 
         "user_name":("user_name","string"), "description":("description", "string"), "url":("video_url", "real"),
@@ -98,9 +101,7 @@ class CreateCurationDatabase(object):
         db = sqlite3.connect(databasePath)
         cursor = db.cursor()
 
-        all_values = VALUE_LIST[:]
-        for j in EXTRA_VALUES:
-            all_values.append(j)
+        all_values = VALUES_ALL[:]
 
         for i in all_values:
             item = VALUE_DICT[i]
@@ -138,7 +139,7 @@ class CreateCurationDatabase(object):
         dataEntryTuple = (currentId, )
         dataEntryList = []
 
-        for i in VALUE_LIST:
+        for i in VALUES:
             exists = data.get(i)
             if exists:
                value = (data[i],)
@@ -146,7 +147,7 @@ class CreateCurationDatabase(object):
                 value = ("NONE", )
             dataEntryTuple += value
 
-        for j in EXTRA_VALUES:
+        for j in VALUES_EXTRA:
             if j == "date_commit":
                 now = str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
                 value = (now,)
