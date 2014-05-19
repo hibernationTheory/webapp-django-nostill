@@ -2,7 +2,7 @@
 
 ## About
 
-**Nostill** is a website for curated content in the field of digital animation that is suitable for mainstream consumption and appreciation. Some types of content that is gathered by **Nostill** are *3d animation*, *visual effects*, *motion graphics*, etc...
+**Nostill** is a website for curated content in the field of digital animation that is suitable for mainstream consumption and appreciation. Some types of content that is gathered by **Nostill** are *3d animation*, *visual effects*, *motion graphics*, etc... As the name suggests, it leans more toward the animated digital or technology driven content than the still imagery.
 
 ## Why Nostill?
 
@@ -23,7 +23,7 @@ I wanted to learn web app development using Python and Django, and starting out 
 
 ## Roadmap
 
-- Enables categorization of the content it presents for filtering by the user (like: see only animation videos, etc..)
-- Has a rating system based on the vimeo data.
-  - This means, the rating of the linked vimeo video should be fetched everytime the video is     loaded.
-- Should present some awesome recent videos for easy access.
+- Add a way to categorize the content it presents for filtering by the user (like: see only animation videos, etc..)
+- Add a rating system based on the vimeo data.
+  - This means, the rating of the linked vimeo video should be fetched everytime the video is loaded.
+- Should present some awesome recent videos for easy access on the homepage.
