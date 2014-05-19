@@ -1,4 +1,4 @@
-# Django settings for nostill project.
+# Django settings for project_nostill project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '8wx0#tc)13(3+@@w37m!n%^dr3)6k8ay_w5+_ol%y#yu%9n+^c'
+SECRET_KEY = '7ud)r93dln!jg-a$mve^=k99a^1w^_^)jmfwkp^3vpu3*294x$'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -102,10 +102,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'nostill.urls'
+ROOT_URLCONF = 'project_nostill.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'nostill.wsgi.application'
+WSGI_APPLICATION = 'project_nostill.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
