@@ -6,19 +6,21 @@ import datetime
 import time
 import sys
 
-#TO DO: you can try to fetch tags from description file?
+#TO DO: 
+# you can try to fetch tags from description file?
+# you are putting in the db_id while creation of the database, to have everything together, you can try putting it in later along with others
 
 VALUES= ["id", "upload_date", "stats_number_of_likes", "thumbnail_large", "thumbnail_medium", "title", "tags", "user_name", "description", "url"]
-VALUES_EXTRA = ["date_commit", "to_commit", "alt_url", "title_simple", "title_tr", "description_tr", "credits", "tags_tr", "video_category"]
+VALUES_EXTRA = ["date_commit", "to_commit", "alt_url", "title_simple", "title_tr", "description_tr", "credits", "tags_tr", "video_category", "db_id"]
 
-ALL_VALUES = VALUES + VALUES_EXTRA
+VALUES_ALL = VALUES + VALUES_EXTRA
 
-VALUE_DICT = {"id":("video_id", "integer"), "upload_date":("upload_date", "date"), "stats_number_of_likes":("noLikes", "integer"), 
+VALUES_DICT = {"id":("video_id", "integer"), "upload_date":("upload_date", "date"), "stats_number_of_likes":("noLikes", "integer"), 
         "thumbnail_large":("thumbnail_large", "string"), "thumbnail_medium":("thumbnail_medium", "string"), "title":("title", "string"), "tags":("tags", "string"), 
         "user_name":("user_name","string"), "description":("description", "string"), "url":("video_url", "real"),
-        "date_commit":("date_commit", "real"), "to_commit":("to_commit", "string"), "alt_url":("alt_url", "string"), "title_simple":("title_simple", "string"),
+        "date_commit":("date_commit", "real"), "to_commit":("to_commit", "string"), "alt_url":("alt_url", "real"), "title_simple":("title_simple", "string"),
         "title_tr":("title_tr", "string"), "description_tr":("description_tr", "string"), "credits":("credits", "string"), 
-        "tags_tr":("tags_tr", "string"), "video_category":("video_category", "string")
+        "tags_tr":("tags_tr", "string"), "video_category":("video_category", "string"), "db_id":("db_id", "integer")
         }
 
 class CreateCurationDatabase(object):
@@ -104,7 +106,7 @@ class CreateCurationDatabase(object):
         all_values = VALUES_ALL[:]
 
         for i in all_values:
-            item = VALUE_DICT[i]
+            item = VALUES_DICT[i]
             if item[1] == "integer":
                 valueType = "INTEGER"
             if item[1] == "date":
@@ -153,6 +155,8 @@ class CreateCurationDatabase(object):
                 value = (now,)
             elif j == "commit":
                 value = ("true", )
+            elif j == "db_id": # this is already included during the creation, is the PRIMARY_ID
+                continue
             else:
                 value = ("NONE", )
             dataEntryTuple += value
